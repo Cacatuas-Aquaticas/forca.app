@@ -1,0 +1,100 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  width: 200px;
+  height: 220px;
+  margin: 0 auto;
+  margin-top: 10px;
+  --spacing-top: 20px;
+  --head-size: 55px;
+  --body-height: 65px;
+}
+
+@media (min-width: 768px) {
+  .wrapper {
+    margin-top: 1vh;
+  }
+}
+
+.hangLeft,
+.hangTop,
+.hangConnector,
+.hangBottom,
+.head,
+.body,
+.leftArm,
+.rightArm,
+.leftLeg,
+.rightLeg {
+  border: 1px solid #fff;
+  position: absolute;
+  box-sizing: border-box;
+  width: 0;
+}
+
+.hangConnector {
+  height: var(--spacing-top);
+  top: 0;
+}
+
+.hangTop {
+  top: 0;
+  height: 2px;
+  width: 50%;
+  left: 0;
+}
+
+.hangLeft {
+  top: 0;
+  height: 100%;
+  width: 2px;
+  left: 0;
+}
+
+.hangBottom {
+  width: 25%;
+  bottom: 0;
+  transform: translateX(-30%);
+  left: 0;
+}
+
+.head {
+  top: var(--spacing-top);
+  border-radius: 50%;
+  width: var(--head-size);
+  height: var(--head-size);
+  border-width: 2px;
+}
+
+.body {
+  height: var(--body-height);
+  top: calc(var(--head-size) + var(--spacing-top));
+  transform: translateX(-50%);
+}
+
+.leftArm {
+  height: 60px;
+  top: calc(var(--head-size) + var(--spacing-top) + 10px);
+  transform: rotate(30deg) translateX(-18px);
+}
+
+.rightArm {
+  height: 60px;
+  top: calc(var(--head-size) + var(--spacing-top) + 10px);
+  transform: rotate(-30deg) translateX(16px);
+}
+
+.leftLeg {
+  height: 70px;
+  top: calc(var(--head-size) + var(--spacing-top) + var(--body-height) + 4px);
+  transform: rotate(30deg) translateX(-22px);
+}
+
+.rightLeg {
+  height: 70px;
+  top: calc(var(--head-size) + var(--spacing-top) + var(--body-height) + 4px);
+  transform: rotate(-30deg) translateX(20px);
+}

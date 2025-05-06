@@ -1,0 +1,94 @@
+.wrapper {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+}
+
+.backdrop {
+  inset: 0;
+  position: fixed;
+  background-color: #000000aa;
+  backdrop-filter: blur(2px);
+}
+
+.modal {
+  position: fixed;
+  background-color: #222;
+  z-index: 1;
+  padding: 1.5rem 2.5rem;
+  border-radius: .5rem;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: 85vw;
+}
+
+@media (min-width: 768px) {
+  .modal {
+    width: unset;
+    min-width: 370px;
+  }
+}
+
+@media (min-width: 768px) {
+  .modal {
+    min-width: 500px;
+  }
+}
+
+.closeButton {
+  cursor: pointer;
+  background-color: transparent;
+  padding: 0;
+  border: 0;
+  font-size: 3rem;
+  transform: rotate(45deg);
+  position: absolute;
+  top: 0;
+  right: .5rem;
+}
+
+.title {
+  margin: 0;
+}
+
+.history {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+  gap: 8px;
+  margin-bottom: 2.5rem;
+}
+
+.choice {
+  width: 25px;
+  height: 25px;
+}
+
+.choice.true {
+  background-color: green;
+}
+
+.choice.false {
+  background-color: red;
+}
+
+.continue {
+  display: block;
+  padding: 1rem 2rem;
+  border-radius: 5px;
+  width: 100%;
+  border: 0;
+  background-color: #007bff;
+  font-size: 1rem;
+  margin-top: 1rem;
+  cursor: pointer;
+  text-decoration: none;
+  color: #fff;
+}
+
+.secondary {
+  background-color: #636363;
+}

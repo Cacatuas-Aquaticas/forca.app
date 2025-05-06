@@ -1,0 +1,104 @@
+.calendar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+}
+
+@media (min-width: 768px) {
+  .calendar {
+    max-width: 690px;
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 1rem;
+  font-size: 1.2em;
+}
+
+@media (min-width: 768px) {
+  .header {
+    padding: 0 20px;
+  }
+}
+
+.header button {
+  background: none;
+  border: none;
+  font-size: 1em;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.daysOfWeek,
+.days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+  width: 100%;
+  text-align: center;
+}
+
+.daysOfWeek {
+  gap: 0;
+}
+
+.daysOfWeek div {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.day {
+  padding: 15px 20px;
+  border: 0;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all .2s ease-out;
+  font-size: 1rem;
+  font-weight: 600;
+  background-color: transparent;
+}
+
+@media (max-width: 768px) {
+  .day {
+    padding: 4px 5px;
+  }
+}
+
+.day:not(:disabled):not(.completed):not(.lost):not(.inProgress):hover {
+  background-color: #3b3b3b;
+}
+
+.day:not(:disabled):hover {
+  filter: brightness(110%);
+}
+
+.day:disabled {
+  opacity: .2;
+  cursor: default;
+  background-color: #222;
+}
+
+.day.completed {
+  background-color: green;
+}
+
+.day.lost {
+  background-color: #ff2a2a;
+}
+
+.day.inProgress {
+  background-color: #ffc60a;
+}
+
+.empty {
+  border: none;
+}

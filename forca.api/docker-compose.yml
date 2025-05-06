@@ -1,0 +1,39 @@
+services:
+  db:
+    image: mysql:8
+    container_name: forca-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: forca
+    ports:
+      - "3307:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - forca-network
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: forca-backend
+    environment:
+      DB_HOST: db
+      DB_USER: root
+      DB_PASS: root
+      DB_NAME: forca
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+    networks:
+      - forca-network
+    depends_on:
+      - db
+
+volumes:
+  db_data:
+
+networks:
+  forca-network:
+     external: true

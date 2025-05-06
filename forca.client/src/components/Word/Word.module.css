@@ -1,0 +1,27 @@
+.word {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0;
+  gap: 10px;
+}
+
+@media (min-width: 768px) {
+  .word {
+    gap: 16px;
+  }
+}
+
+.letter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  width: 30px;
+  border-bottom: 1px solid #fdfdfd;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.letter[data-hideborder="true"] {
+  border-bottom: 0;
+}
