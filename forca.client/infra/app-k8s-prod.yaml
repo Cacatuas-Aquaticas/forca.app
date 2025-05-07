@@ -2,14 +2,14 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: production
+  name: prod
 
 ---
 apiVersion: v1
 kind: Secret
 metadata:
   name: db-secret
-  namespace: production
+  namespace: prod
 type: Opaque
 stringData:
   MYSQL_ROOT_PASSWORD: root
@@ -22,7 +22,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: mysql-pvc
-  namespace: production
+  namespace: prod
 spec:
   accessModes:
     - ReadWriteOnce
@@ -35,7 +35,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mysql
-  namespace: production
+  namespace: prod
 spec:
   replicas: 1
   selector:
@@ -75,7 +75,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: db
-  namespace: production
+  namespace: prod
 spec:
   selector:
     app: mysql
@@ -89,7 +89,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: backend
-  namespace: production
+  namespace: prod
 spec:
   replicas: 1
   selector:
@@ -126,7 +126,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: backend
-  namespace: production
+  namespace: prod
 spec:
   type: ClusterIP
   selector:
@@ -140,7 +140,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: frontend
-  namespace: production
+  namespace: prod
 spec:
   replicas: 1
   selector:
@@ -162,7 +162,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: frontend
-  namespace: production
+  namespace: prod
 spec:
   type: NodePort
   selector:
