@@ -16,6 +16,7 @@ jobs:
       IMAGE_NAME: jeanmendonca/forcaclient:latest
       K8S_MANIFEST: ${{ github.ref_name == 'dev' && 'forca.client/infra/app-k8s-stage.yaml' || 'forca.client/infra/app-k8s-prod.yaml' }}
 
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -57,4 +58,4 @@ jobs:
 
       - name: Deploy to GKE
         run: |
-          kubectl apply -f forca.client/infra/${{ env.K8S_MANIFEST }}
+          kubectl apply -f $K8S_MANIFEST
