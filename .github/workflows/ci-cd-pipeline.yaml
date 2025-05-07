@@ -1,4 +1,3 @@
-#pipelinee
 name: Backend CI/CD Pipeline
 
 on:
@@ -15,7 +14,7 @@ jobs:
 
     env:
       IMAGE_NAME: jeanmendonca/forcaapi:latest
-      K8S_NAMESPACE: ${{ github.ref_name == 'dev' && secrets.K8S_NAMESPACE_STAGE || secrets.K8S_NAMESPACE_PROD }}
+      K8S_MANIFEST: ${{ github.ref_name == 'dev' && 'infra/app-k8s-stage.yaml' || 'infra/app-k8s-prod.yaml' }}
 
     steps:
       - name: Checkout code
@@ -58,4 +57,4 @@ jobs:
 
       - name: Deploy to GKE
         run: |
-          kubectl apply -f infra/${{ env.K8S_NAMESPACE }}/
+          kubectl apply -f $K8S_MANIFEST
