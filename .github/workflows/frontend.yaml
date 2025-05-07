@@ -57,4 +57,4 @@ jobs:
 
       - name: Deploy to GKE
         run: |
-          kubectl apply -f k8s/${{ env.K8S_NAMESPACE }}/
+          kubectl apply -f infra/${{ env.K8S_NAMESPACE }}/
