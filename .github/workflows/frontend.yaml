@@ -14,7 +14,8 @@ jobs:
 
     env:
       IMAGE_NAME: jeanmendonca/forcaclient:latest
-      K8S_NAMESPACE: ${{ github.ref_name == 'dev' && secrets.K8S_NAMESPACE_STAGE || secrets.K8S_NAMESPACE_PROD }}
+      K8S_MANIFEST: ${{ github.ref_name == 'dev' && 'forca.client/infra/app-k8s-stage.yaml' || 'forca.client/infra/app-k8s-prod.yaml' }}
+
 
     steps:
       - name: Checkout repository
@@ -24,7 +25,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 22
-          cache: 'npm'
 
       - name: Install dependencies
         working-directory: ./forca.client
@@ -58,4 +58,4 @@ jobs:
 
       - name: Deploy to GKE
         run: |
-          kubectl apply -f k8s/${{ env.K8S_NAMESPACE }}/
+          kubectl apply -f $K8S_MANIFEST
