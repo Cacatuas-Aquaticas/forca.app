@@ -1,3 +1,4 @@
+#teste2
 name: Backend CI/CD Pipeline
 
 on:
@@ -7,6 +8,9 @@ on:
       - dev
     tags:
       - 'release/*'
+  pull_request:
+    branches:
+      - dev
 
 jobs:
   build-and-deploy:
@@ -59,9 +63,13 @@ jobs:
         run: |
           kubectl apply -f $K8S_MANIFEST
 
-      - name: Notify Slack on PR
-        if: github.event_name == 'pull_request'
-        run: |
-          curl -X POST -H 'Content-type: application/json' \
-          --data '{"text":"🔁 Novo *Pull Request* aberto em `${{ github.repository }}` na branch `${{ github.head_ref }}`"}' \
-          ${{ secrets.SLACK_WEBHOOK_URL }}
+      - name: Notify Slack (release only)
+        if: startsWith(github.ref, 'refs/tags/release/')
+        uses: slackapi/slack-github-action@v1.24.0
+        with:
+          payload: |
+            {
+              "text": ":rocket: Uma nova versão *${{ github.ref_name }}* do backend foi publicada em *pré-produção*!"
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
