@@ -16,7 +16,6 @@ jobs:
       IMAGE_NAME: jeanmendonca/forcaclient:latest
       K8S_MANIFEST: ${{ github.ref_name == 'dev' && 'forca.client/infra/app-k8s-stage.yaml' || 'forca.client/infra/app-k8s-prod.yaml' }}
 
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -59,3 +58,14 @@ jobs:
       - name: Deploy to GKE
         run: |
           kubectl apply -f $K8S_MANIFEST
+
+      - name: Notify Slack (release only)
+        if: startsWith(github.ref, 'refs/tags/release/')
+        uses: slackapi/slack-github-action@v1.24.0
+        with:
+          payload: |
+            {
+              "text": ":sparkles: Nova versão *${{ github.ref_name }}* do frontend implantada em *pré-produção*!"
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
