@@ -67,7 +67,7 @@ spec:
       volumes:
         - name: mysql-storage
           gcePersistentDisk:
-            pdName: mysql-disk-prod  # Nome do disco persistente no GCP
+            pdName: mysql-disk-prod
             fsType: ext4
 
 ---
@@ -102,6 +102,7 @@ spec:
       containers:
         - name: backend
           image: jeanmendonca/forcaapi:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 3000
           env:
@@ -153,6 +154,7 @@ spec:
       containers:
         - name: frontend
           image: jeanmendonca/forcaclient:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 80
 

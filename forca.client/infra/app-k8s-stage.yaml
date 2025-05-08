@@ -48,6 +48,7 @@ spec:
       containers:
         - name: mysql
           image: mysql:8
+          imagePullPolicy: Always
           env:
             - name: MYSQL_ROOT_PASSWORD
               valueFrom:
@@ -67,7 +68,7 @@ spec:
       volumes:
         - name: mysql-storage
           gcePersistentDisk:
-            pdName: mysql-disk-stage  # Nome do disco persistente no GCP
+            pdName: mysql-disk-stage  # Disco persistente para o ambiente de stage
             fsType: ext4
 
 ---
@@ -102,6 +103,7 @@ spec:
       containers:
         - name: backend
           image: jeanmendonca/forcaapi:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 3000
           env:
@@ -153,6 +155,7 @@ spec:
       containers:
         - name: frontend
           image: jeanmendonca/forcaclient:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 80
 
