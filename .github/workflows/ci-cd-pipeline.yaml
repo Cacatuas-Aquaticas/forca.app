@@ -1,3 +1,4 @@
+#teste2
 name: Backend CI/CD Pipeline
 
 on:
@@ -7,6 +8,9 @@ on:
       - dev
     tags:
       - 'release/*'
+  pull_request:
+    branches:
+      - dev
 
 jobs:
   build-and-deploy:
