@@ -67,9 +67,8 @@ spec:
               mountPath: /var/lib/mysql
       volumes:
         - name: mysql-storage
-          gcePersistentDisk:
-            pdName: mysql-disk-stage  # Disco persistente para o ambiente de stage
-            fsType: ext4
+          persistentVolumeClaim:
+            claimName: mysql-pvc
 
 ---
 apiVersion: v1
