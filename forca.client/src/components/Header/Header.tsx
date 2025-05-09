@@ -4,7 +4,7 @@ import styles from './Header.module.css'
 const Header = () => {
   return (
     <header className={styles.header}>
-      <Link to="/calendar" className={styles.logo}>FORCA STAGE</Link>
+      <Link to="/calendar" className={styles.logo}>FORCA</Link>
     </header>
   )
 }
