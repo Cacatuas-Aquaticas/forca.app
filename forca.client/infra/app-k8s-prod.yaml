@@ -20,14 +20,14 @@ stringData:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: mysql-pvc-prod
+  name: mysql-pvc
   namespace: prod
 spec:
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 2Gi
+      storage: 1Gi
 
 ---
 apiVersion: apps/v1
@@ -67,7 +67,7 @@ spec:
       volumes:
         - name: mysql-storage
           persistentVolumeClaim:
-            claimName: mysql-pvc-prod
+            claimName: mysql-pvc
 
 ---
 apiVersion: v1
