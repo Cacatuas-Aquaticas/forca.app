@@ -3,7 +3,7 @@ services:
     image: mysql:8
     container_name: forca-db
     environment:
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: userdev
       MYSQL_DATABASE: forca
     ports:
       - "3307:3306"
