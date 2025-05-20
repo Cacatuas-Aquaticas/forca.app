@@ -54,14 +54,12 @@ forca.app/
 ### 1. Backend
 
 cd forca.api  
-npm install  
-npm run dev  
+npm install   
 
 ### 2. Frontend
 
 cd forca-client  
 npm install  
-npm run dev  
 
 ### 3. Banco de Dados (MySQL)
 
