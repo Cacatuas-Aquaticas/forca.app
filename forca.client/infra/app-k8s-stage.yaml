@@ -2,7 +2,6 @@ apiVersion: v1
 kind: Namespace
 metadata:
   name: stage
-
 ---
 apiVersion: v1
 kind: Secret
@@ -15,7 +14,6 @@ stringData:
   MYSQL_DATABASE: forca
   MYSQL_USER: root
   MYSQL_PASSWORD: root
-
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -28,7 +26,6 @@ spec:
   resources:
     requests:
       storage: 1Gi
-
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -69,7 +66,6 @@ spec:
         - name: mysql-storage
           persistentVolumeClaim:
             claimName: mysql-pvc
-
 ---
 apiVersion: v1
 kind: Service
@@ -77,12 +73,9 @@ metadata:
   name: db
   namespace: stage
 spec:
-  selector:
-    app: mysql
   ports:
     - port: 3306
   clusterIP: None
-
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -94,10 +87,12 @@ spec:
   selector:
     matchLabels:
       app: backend
+      env: stage
   template:
     metadata:
       labels:
         app: backend
+        env: stage
     spec:
       containers:
         - name: backend
@@ -119,8 +114,17 @@ spec:
             - name: JWT_SECRET
               value: chaveapiforca
             - name: OPENAI_API_KEY
-              value: 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
-
+              valueFrom:
+                secretKeyRef:
+                  name: openai-secret
+                  key: OPENAI_API_KEY
+          resources:
+            requests:
+              cpu: "200m"
+              memory: "512Mi"
+            limits:
+              cpu: "500m"
+              memory: "1Gi"
 ---
 apiVersion: v1
 kind: Service
@@ -131,10 +135,10 @@ spec:
   type: ClusterIP
   selector:
     app: backend
+    env: stage
   ports:
     - port: 3000
       targetPort: 3000
-
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -146,10 +150,12 @@ spec:
   selector:
     matchLabels:
       app: frontend
+      env: stage
   template:
     metadata:
       labels:
         app: frontend
+        env: stage
     spec:
       containers:
         - name: frontend
@@ -157,18 +163,32 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 80
-
+          env:
+            - name: REACT_APP_BACKEND_URL
+              value: "http://backend:3000"
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "256Mi"
+            limits:
+              cpu: "250m"
+              memory: "512Mi"
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: frontend
   namespace: stage
+  annotations:
+    cloud.google.com/load-balancer-type: "External"
+    networking.gke.io/load-balancer-ip-address: "34.69.159.21"  
 spec:
-  type: NodePort
   selector:
     app: frontend
+    env: stage
   ports:
-    - port: 80
+    - protocol: TCP
+      port: 80
       targetPort: 80
-      nodePort: 30001
+  type: LoadBalancer
+

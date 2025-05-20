@@ -17,6 +17,7 @@ jobs:
       LOCATION: us-central1
       REPOSITORY: forca-repo
       IMAGE_NAME: us-central1-docker.pkg.dev/forca-app-459118/forca-repo/forcaapi
+      OPENAI_API_KEY: ${{ secrets.KEY }}  
 
     steps:
       - name: Checkout code
@@ -30,10 +31,14 @@ jobs:
       - name: Install dependencies
         working-directory: ./forca.api
         run: npm install
+        env:
+          OPENAI_API_KEY: ${{ secrets.KEY }}
 
       - name: Run tests
         working-directory: ./forca.api
         run: npm test
+        env:
+          OPENAI_API_KEY: ${{ secrets.KEY }}
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
