@@ -52,7 +52,7 @@ jobs:
           if [[ "${GITHUB_REF}" == "refs/heads/dev" ]]; then
             echo "NAMESPACE=stage" >> $GITHUB_ENV
           else
-            echo "NAMESPACE=prod" >> $GITHUB_ENV
+            echo "NAMESPACE=production" >> $GITHUB_ENV
           fi
 
       - name: Build and push Docker image
