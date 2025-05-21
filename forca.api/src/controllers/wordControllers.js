@@ -16,6 +16,7 @@ async function populateWords(req, res) {
 async function getRandomWord(req, res) {
 
     try {
+        res.json({word: "PROFESSOR"})/* 
         const word = await Word.findOne({ where: { used: false } });
 
         if (!word) {
@@ -26,7 +27,7 @@ async function getRandomWord(req, res) {
         await word.save();
 
         res.json({ word: word.word });
-
+ */
     } catch (error) {
         console.error("Erro ao buscar palavra", error);
         res.status(500).json({ error: "Erro ao buscar palavra" });
