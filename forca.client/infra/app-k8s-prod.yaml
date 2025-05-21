@@ -152,7 +152,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: us-central1-docker.pkg.dev/forca-app-459118/forca-repo/forcaapi:front
+          image: us-central1-docker.pkg.dev/forca-app-459118/forca-repo/forcaclient:front
           imagePullPolicy: Always
           ports:
             - containerPort: 80
