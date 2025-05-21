@@ -14,7 +14,8 @@ async function getGameWord(req,res){
     }
 
     try{
-        let game = await Game.findOne({where: { date }});
+        res.json({word: "PROFESSOR"})
+        /* let game = await Game.findOne({where: { date }});
 
         if(game) {
             return res.json({word: game.word});
@@ -31,7 +32,7 @@ async function getGameWord(req,res){
 
         game = await Game.create({date, word: wordEntry.word});
 
-        res.json({word: game.word});
+        res.json({word: game.word}); */
 
     }catch (error) {
         console.error("Erro ao obter a palavra do jogo:",error);
