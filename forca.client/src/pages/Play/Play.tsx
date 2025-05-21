@@ -35,6 +35,7 @@ const Play = () => {
             <Word />
           </div>
           <Keyboard />
+          Teste
         </PlayProvider>
       ) : <LoadingGame />}
     </main>
