@@ -72,7 +72,7 @@ jobs:
       - name: Update frontend image on GKE
         run: |
           TAG=${GITHUB_SHA::7}
-          kubectl set image deployment/frontend frontend=$IMAGE_NAME:latest -n $NAMESPACE
+          kubectl set image deployment/frontend frontend=$IMAGE_NAME:frontend -n $NAMESPACE
           kubectl rollout status deployment/frontend -n $NAMESPACE
         env:
           GITHUB_SHA: ${{ github.sha }}
