@@ -58,8 +58,8 @@ jobs:
       - name: Build and push Docker image
         run: |
           TAG=${GITHUB_SHA::7}
-          docker build -t $IMAGE_NAME:$TAG ./forca.client
-          docker push $IMAGE_NAME:$TAG
+          docker build -t $IMAGE_NAME:front ./forca.client
+          docker push $IMAGE_NAME:front
         env:
           GITHUB_SHA: ${{ github.sha }}
 
@@ -72,7 +72,7 @@ jobs:
       - name: Update frontend image on GKE
         run: |
           TAG=${GITHUB_SHA::7}
-          kubectl set image deployment/frontend frontend=$IMAGE_NAME:$TAG -n $NAMESPACE
+          kubectl set image deployment/frontend frontend=$IMAGE_NAME:latest -n $NAMESPACE
           kubectl rollout status deployment/frontend -n $NAMESPACE
         env:
           GITHUB_SHA: ${{ github.sha }}
